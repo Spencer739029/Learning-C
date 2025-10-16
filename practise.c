@@ -1,7 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 
+// In C, arguments are copied by value to functions,
+//  which means that we cannot change 
+// the arguments to affect their value outside of
+//  the function. To do that, we must use pointers
+int fun(int bar);
+
 int main() {
+    fun(1);
+
     int n = 0;
     // \/ Simple
     // while (n < 10) {
@@ -103,4 +111,9 @@ int main() {
     sum = a + b;
     printf("Sum: %d", sum);
     return 0;
+}
+
+int fun(int bar) {
+    printf("Function test\n");
+    return bar * 2;
 }
