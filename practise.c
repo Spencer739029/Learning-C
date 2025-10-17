@@ -1,13 +1,47 @@
 #include <stdio.h>
 #include <string.h>
 
-// In C, arguments are copied by value to functions,
-//  which means that we cannot change 
-// the arguments to affect their value outside of
-//  the function. To do that, we must use pointers
+// 'static' before a function means 
+// it has *internal linkage*.
+// It can only be called from within this 
+// file (not from other .c files).
+// It's kind of like making it "private" 
+// to this source file.
+static void func(void) {
+    printf("I am a static function.\n");
+}
+
+// This function uses a *static local variable*.
+// 'count' keeps its value between 
+// calls instead of resetting each time.
+int runner() {
+    // initialized once, persists across function calls
+    static int count = 0;
+    // increment every time runner() is called
+    count++;        
+    // return the updated value
+    return count;
+}
+
 int fun(int bar);
 
+// 'main' is the program's entry point.
 int main() {
+    /* define a local variable a */
+    int number = 1;
+
+    /* define a pointer variable, and point it to a using the & operator */
+    int * pointer_to_number = &number;
+
+    printf("The value a is %d\n", number);
+    printf("The value of a is also %d\n", *pointer_to_number);
+
+    func();  // Calls the static function defined above
+
+    // Each time runner() is called, the static variable 'count' increases by 1.
+    printf("Runner %d\n", runner());  // First call → count = 1
+    printf("Runner %d\n", runner());  // Second call → count = 2
+
     fun(1);
 
     int n = 0;
