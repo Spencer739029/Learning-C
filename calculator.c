@@ -1,10 +1,13 @@
 #include <stdio.h>
+#include <ctype.h>
 
 int main() {
     float num1;
     float num2;
     char operation;
     float sum;
+    char remainder_ask;
+    int remainder;
 
     printf("Enter num 1: ");
     scanf("%f", &num1);
@@ -28,6 +31,12 @@ int main() {
         } else {
             sum = num1 / num2;
             printf("Sum: %.1f\n", sum);
+            printf("Get remainder? (y/n)");
+            scanf(" %c", &remainder_ask);
+            if (tolower(remainder_ask) == 'y') {
+                remainder = (int)num1 % (int)num2;
+                printf("Remainder: %d\n", remainder);
+            }
         }
     }
 }
